@@ -137,7 +137,6 @@ class UserController extends Controller
             'dinner_cholesterol'     => 'required|array',
         ]);
 
-
         $user = User::where('id', Auth::id())->first();
         $input = $request->all();
         if ($user) {

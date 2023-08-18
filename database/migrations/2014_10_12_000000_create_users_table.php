@@ -29,50 +29,50 @@ class CreateUsersTable extends Migration
 
             $table->float('BMR')->nullable();
 
-            $table->float('daily_calories')->nullable();
-            $table->float('breakfast_calories')->nullable();
-            $table->float('lunch_calories')->nullable();
-            $table->float('dinner_calories')->nullable();
+            $table->json('daily_calories')->nullable();
+            $table->json('breakfast_calories')->nullable();
+            $table->json('lunch_calories')->nullable();
+            $table->json('dinner_calories')->nullable();
 
-            $table->float('daily_protein')->nullable();
-            $table->float('breakfast_protein')->nullable();
-            $table->float('lunch_protein')->nullable();
-            $table->float('dinner_protein')->nullable();
+            $table->json('daily_protein')->nullable();
+            $table->json('breakfast_protein')->nullable();
+            $table->json('lunch_protein')->nullable();
+            $table->json('dinner_protein')->nullable();
 
-            $table->float('daily_carbohydrate')->nullable();
-            $table->float('breakfast_carbohydrate')->nullable();
-            $table->float('lunch_carbohydrate')->nullable();
-            $table->float('dinner_carbohydrate')->nullable();
+            $table->json('daily_carbohydrate')->nullable();
+            $table->json('breakfast_carbohydrate')->nullable();
+            $table->json('lunch_carbohydrate')->nullable();
+            $table->json('dinner_carbohydrate')->nullable();
 
-            $table->float('daily_fat')->nullable();
-            $table->float('breakfast_fat')->nullable();
-            $table->float('lunch_fat')->nullable();
-            $table->float('dinner_fat')->nullable();
+            $table->json('daily_fat')->nullable();
+            $table->json('breakfast_fat')->nullable();
+            $table->json('lunch_fat')->nullable();
+            $table->json('dinner_fat')->nullable();
 
-            $table->float('daily_saturatedFat')->nullable();
-            $table->float('breakfast_saturatedFat')->nullable();
-            $table->float('lunch_saturatedFat')->nullable();
-            $table->float('dinner_saturatedFat')->nullable();
+            $table->json('daily_saturatedFat')->nullable();
+            $table->json('breakfast_saturatedFat')->nullable();
+            $table->json('lunch_saturatedFat')->nullable();
+            $table->json('dinner_saturatedFat')->nullable();
 
-            $table->float('daily_sugar')->nullable();
-            $table->float('breakfast_sugar')->nullable();
-            $table->float('lunch_sugar')->nullable();
-            $table->float('dinner_sugar')->nullable();
+            $table->json('daily_sugar')->nullable();
+            $table->json('breakfast_sugar')->nullable();
+            $table->json('lunch_sugar')->nullable();
+            $table->json('dinner_sugar')->nullable();
 
-            $table->float('daily_fiber')->nullable();
-            $table->float('breakfast_fiber')->nullable();
-            $table->float('lunch_fiber')->nullable();
-            $table->float('dinner_fiber')->nullable();
+            $table->json('daily_fiber')->nullable();
+            $table->json('breakfast_fiber')->nullable();
+            $table->json('lunch_fiber')->nullable();
+            $table->json('dinner_fiber')->nullable();
 
-            $table->float('daily_sodium')->nullable();
-            $table->float('breakfast_sodium')->nullable();
-            $table->float('lunch_sodium')->nullable();
-            $table->float('dinner_sodium')->nullable();
+            $table->json('daily_sodium')->nullable();
+            $table->json('breakfast_sodium')->nullable();
+            $table->json('lunch_sodium')->nullable();
+            $table->json('dinner_sodium')->nullable();
 
-            $table->float('daily_cholesterol')->nullable();
-            $table->float('breakfast_cholesterol')->nullable();
-            $table->float('lunch_cholesterol')->nullable();
-            $table->float('dinner_cholesterol')->nullable();
+            $table->json('daily_cholesterol')->nullable();
+            $table->json('breakfast_cholesterol')->nullable();
+            $table->json('lunch_cholesterol')->nullable();
+            $table->json('dinner_cholesterol')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
