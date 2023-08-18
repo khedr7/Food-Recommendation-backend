@@ -197,7 +197,7 @@ class UserController extends Controller
         $recipes = UserRecipe::where("user_id", Auth::id())->pluck('recipe_id');
 
         return response()->json([
-            'recipes' => $recipes,
+            'favorite' => $recipes,
         ], 200);
     }
 }
