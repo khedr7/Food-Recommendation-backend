@@ -91,4 +91,9 @@ class User extends Authenticatable
         'lunch_cholesterol'      => 'array',
         'dinner_cholesterol'     => 'array',
     ];
+
+    public function favoriteRecipes()
+    {
+        return $this->hasMany(UserRecipe::class)->where('type', 'favorite');
+    }
 }

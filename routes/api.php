@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login',    [UserController::class, 'login']);
@@ -25,9 +22,12 @@ Route::post('/login',    [UserController::class, 'login']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('/logout', [UserController::class, 'logout']);
 
     Route::get('/show',    [UserController::class, 'show']);
     Route::post('/update', [UserController::class, 'update']);
+    
+    Route::get('/get-favorite',        [UserController::class, 'getFavoriteRecipe']);
+    Route::post('/add-to-favorite',    [UserController::class, 'addToFavorite']);
+    Route::post('/remove-to-favorite', [UserController::class, 'removeToFavorite']);
 });
-

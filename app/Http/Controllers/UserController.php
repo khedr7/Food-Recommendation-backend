@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRecipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -150,9 +151,53 @@ class UserController extends Controller
             'message' => 'error',
         ], 400);
     }
+
+    public function addToFavorite(Request $request)
+    {
+        $recipe = UserRecipe::where("user_id", Auth::id())->where("recipe_id", $request->recipe_id)->first();
+        if ($recipe) {
+            return response()->json([
+                'message' => 'recipe is already in favorite list.',
+            ], 400);
+        }
+        $id = UserRecipe::create([
+            "user_id"   => Auth::id(),
+            "recipe_id" => $request->recipe_id,
+            "type"      => "favorite",
+        ]);
+
+        if ($id) {
+            return response()->json([
+                'message'  => "recipe added to favorite successfully.",
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'error',
+        ], 400);
+    }
+
+    public function removeToFavorite(Request $request)
+    {
+        $recipe = UserRecipe::where("user_id", Auth::id())->where("recipe_id", $request->recipe_id)->first();
+
+        if ($recipe) {
+            $recipe->delete();
+            return response()->json([
+                'message'  => "recipe deleted to favorite successfully.",
+            ], 200);
+        } else {
+            return response()->json([
+                'message'  => "Not found",
+            ], 404);
+        }
+    }
+
+    public function getFavoriteRecipe(Request $request)
+    {
+        $recipes = UserRecipe::where("user_id", Auth::id())->pluck('recipe_id');
+
+        return response()->json([
+            'recipes' => $recipes,
+        ], 200);
+    }
 }
-
-
-
-
-
