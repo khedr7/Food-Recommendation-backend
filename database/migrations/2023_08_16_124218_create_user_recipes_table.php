@@ -17,7 +17,7 @@ class CreateUserRecipesTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('recipe_id')->nullable();
-            $table->enum('type', ['favorite', 'daily', 'breakfast', 'lunch', 'dinner'])->nullable();
+            $table->enum('type', ['favorite', 'breakfast', 'lunch', 'dinner'])->nullable();
             $table->timestamps();
         });
     }

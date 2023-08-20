@@ -26,8 +26,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/show',    [UserController::class, 'show']);
     Route::post('/update', [UserController::class, 'update']);
-    
+
     Route::get('/get-favorite',        [UserController::class, 'getFavoriteRecipe']);
     Route::post('/add-to-favorite',    [UserController::class, 'addToFavorite']);
     Route::post('/remove-to-favorite', [UserController::class, 'removeToFavorite']);
+
+    Route::get('/get-daily',     [UserController::class, 'getDailyFood']);
+    Route::post('/add-to-daily', [UserController::class, 'addToDailyFood']);
+
 });

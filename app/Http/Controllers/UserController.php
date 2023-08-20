@@ -16,17 +16,18 @@ class UserController extends Controller
             'name'         => 'required',
             'email'        => 'required|email',
             'password'     => 'required',
-            'gender'       => 'required',
-            'height'       => 'required',
-            'weight'       => 'required|string',
-            'activity'     => 'required|string',
-            'goal'         => 'required|string',
-            'vegetarian'   => 'required',
+            'gender'       => 'nullable',
+            'height'       => 'nullable',
+            'weight'       => 'nullable|string',
+            'activity'     => 'nullable|string',
+            'goal'         => 'nullable|string',
+            'vegetarian'   => 'nullable',
             'food_allergy' => 'array',
         ]);
 
-        $validation['password'] = bcrypt($validation['password']);
-        $user  = User::create($validation);
+        $input = $request->all();
+        $input['password'] = bcrypt($validation['password']);
+        $user  = User::create($input);
         $token = $user->createToken('auth');
         $user_data = User::where('id', '=', $user->id)->first();
         if ($user) {
@@ -44,10 +45,9 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
-
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $user->tokens()->delete();
@@ -198,6 +198,40 @@ class UserController extends Controller
 
         return response()->json([
             'favorite' => $recipes,
+        ], 200);
+    }
+
+    public function addToDailyFood(Request $request)
+    {
+        $validation = $request->validate([
+            'type'         => 'required',
+            'ids'          => 'required|array',
+            'ids.*'        => 'numeric',
+        ]);
+
+        foreach ($request->ids as $id) {
+            $id = UserRecipe::create([
+                "user_id"   => Auth::id(),
+                "recipe_id" => $id,
+                "type"      => $request->type,
+            ]);
+        }
+
+        return response()->json([
+            'message'  => "recipes added successfully.",
+        ], 200);
+    }
+
+    public function getDailyFood(Request $request)
+    {
+        $breakfast = UserRecipe::where("user_id", Auth::id())->where("type", "breakfast")->orderBy('created_at')->take(5)->pluck('recipe_id');
+        $lunch     = UserRecipe::where("user_id", Auth::id())->where("type", "lunch")->orderBy('created_at')->take(5)->pluck('recipe_id');
+        $dinner    = UserRecipe::where("user_id", Auth::id())->where("type", "dinner")->orderBy('created_at')->take(5)->pluck('recipe_id');
+
+        return response()->json([
+            'breakfast' => $breakfast,
+            'lunch'     => $lunch,
+            'dinner'    => $dinner,
         ], 200);
     }
 }

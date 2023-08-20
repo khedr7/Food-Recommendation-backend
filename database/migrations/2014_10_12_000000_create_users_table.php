@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('gender');
-            $table->float('height');
-            $table->float('weight');
-            $table->string('activity');
-            $table->string('goal');
+            $table->string('password')->nullable();
+            $table->string('gender')->nullable();
+            $table->float('height')->nullable();
+            $table->float('weight')->nullable();
+            $table->string('activity')->nullable();
+            $table->string('goal')->nullable();
             $table->boolean('vegetarian')->default(0);
             $table->string('food_allergy')->nullable();
 
