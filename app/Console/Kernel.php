@@ -7,6 +7,13 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        \App\Console\Commands\BreakfastNotification::class,
+        \App\Console\Commands\LunchNotification::class,
+        \App\Console\Commands\DinnerNotification::class,
+    ];
+
     /**
      * Define the application's command schedule.
      *
@@ -16,6 +23,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('notification:breakfast')->dailyAt('06:00')->timezone('Asia/Damascus');
+        $schedule->command('notification:lunch')->dailyAt('11:00')->timezone('Asia/Damascus');
+        $schedule->command('notification:dinner')->dailyAt('17:00')->timezone('Asia/Damascus');
     }
 
     /**
@@ -25,8 +35,12 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
+
+
     }
+
+
 }

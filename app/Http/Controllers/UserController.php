@@ -23,6 +23,7 @@ class UserController extends Controller
             'goal'         => 'nullable|string',
             'vegetarian'   => 'nullable',
             'food_allergy' => 'array',
+            'device_token' => 'nullable',
         ]);
 
         $input = $request->all();
@@ -45,8 +46,9 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'        => 'required|email',
+            'password'     => 'required',
+            'device_token' => 'nullable',
         ]);
         if (Auth::attempt($credentials)) {
             $user = Auth::user();

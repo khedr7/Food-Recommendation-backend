@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('goal')->nullable();
             $table->boolean('vegetarian')->default(0);
             $table->string('food_allergy')->nullable();
+            $table->string('device_token')->nullable();
 
             $table->float('BMR')->nullable();
 
